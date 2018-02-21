@@ -36,8 +36,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello World</h1>
-        <NameTag name ="Brad" />
+        <h1>BOOK APP</h1>
+        <NameTag name ="Book Title" />
 
         <BookList books={this.state.bookList} />
       </div>
