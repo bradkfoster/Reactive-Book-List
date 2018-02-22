@@ -7,7 +7,11 @@ const BookList = ({books}) =>{
     {
       books.map((book)=>{
         return (
-         <div>{book.title}</div>
+          <div className = 'bookListContainer'>
+            <div>{book.title}</div>
+            
+            <div>{book.author}</div>
+          </div>
         )
       })
     }
