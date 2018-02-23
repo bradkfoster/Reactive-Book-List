@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {getBooksFromFakeXHR as getBooks} from '../lib/books.db';
-import {addBookToFakeXHR as addBook} from '../lib/books.db';
+import {connect} from 'react-redux';
 // import BookList from '../components/BookListAppTitle';
 import NameTag from '../components/BookListAppTitle'
 import AddedBook from './NewBookForm/index'
 import BookList from '../containers/BookList/index'
 import BookFilter from '../components/BookFilterInput';
+import {addBook} from '../actions/booklistAction';
+
+
 
 
 
@@ -19,56 +22,56 @@ class App extends Component {
   constructor(props){
     super(props);
    
-    this.state = {
-      bookList: [],
-      findbook: ''
-      }
-     
+    console.log(this.props)
   }
 
-  componentDidMount(){
-    getBooks()
-    .then(result=>{
-      this.setState({
-        bookList:result
-      })
-    })
-  }
+ 
+  
 
-  newBook(book){
-    let anotherBook = {
-      title: book.title,
-      author: book.author
-    }
-    addBook(anotherBook)
-      .then(resultTwo => {
-        console.log(resultTwo);
-        
-        this.setState({bookList: resultTwo})
-      })
-  }
+ 
 
-  foundBook(event){
-    const findbook = event.target.value
-    this.setState({findbook})
-  }
+  // foundBook(event){
+  //   const findbook = event.target.value
+  //   this.setState({findbook})
+  // }
  
 
 
 
-
+  
 
   render() {
     return (
-      <div className="App">
-        <h1>BOOK APP</h1>
-        <NameTag name ="Book Title" />
-        <BookFilter findbook={this.foundBook.bind(this)}/>
-        <BookList books={this.state.bookList} findbook ={this.state.findbook}/>
-        <AddedBook newBook={this.newBook.bind(this)} />
+  
+      // <div className="App">
+      //   <h1>BOOK APP</h1>
+        // <NameTag name ="Book Title" />
+        // <BookFilter findbook={this.foundBook.bind(this)}/>
+      <div>
+        <BookList books={this.props.books} />
+        <AddedBook props={this.props} />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state =>{
+  
+  return {
+   
+    books:state.booklist.books,
+    nextId:state.booklist.nextId
+  }
+}
+const mapDispatchToProps = {
+  addBook
+}
+
+const ConnectedApp = connect (
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
+
+
+
+export default ConnectedApp;

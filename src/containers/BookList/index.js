@@ -5,17 +5,21 @@ import BookListItem from '../../components/BookListItem'
 
 
 const BookList = ({ books, findbook }) => {
+  console.log(books)
+  
   return (
     <div className="book-list-container">
     {
       books
-     .filter(elem=>{
-        return (
-          elem.title.indexOf(findbook)>=0||
-          elem.author.indexOf(findbook) >=0
-        )
-      })
+    //  .filter(elem=>{
+    //    console.log(elem);
+    //     return (
+    //       elem.title.indexOf(findbook)>=0||
+    //       elem.author.indexOf(findbook) >=0
+    //     )
+    //   })
       .map((book, index) => {
+        console.log(book)
         return (
           <BookListItem key={ index } book={ book } />
            //react needs a key whenever iterating, 
